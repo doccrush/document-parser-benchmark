@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: DocCrush — convert documents to Markdown online
+    url: https://doccrush.com
+    about: Try DocCrush for an online document-to-Markdown workflow optimized for AI/RAG pipelines.
+  - name: Benchmark results & methodology
+    url: https://github.com/doccrush/document-parser-benchmark#tldr
+    about: Read the TL;DR, methodology, and full results before opening an issue.

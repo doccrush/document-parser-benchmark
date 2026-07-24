@@ -76,6 +76,8 @@ Scores are an **AI-assisted preliminary assessment** of the actual Markdown outp
 
 ### Per-document weighted scores (0–5)
 
+![Weighted score heatmap: document × parser, darker is better](docs/results-heatmap.svg)
+
 | Document | Type | MarkItDown | Docling | Marker | MinerU |
 |---|---|:---:|:---:|:---:|:---:|
 | NIPS — Attention Is All You Need | Multi-column academic | 1.70 | **4.55** | 3.60 | 4.15 |
