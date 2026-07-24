@@ -242,7 +242,7 @@ with open(out, "w", encoding="utf-8") as f:
 '''
 
 
-def run_docling(pdf, output, timeout, keep_raw):
+def run_docling(pdf, output, timeout, keep_raw, image_mode="embedded"):
 
     work_dir = output.parent / "docling_output"
 
@@ -253,6 +253,9 @@ def run_docling(pdf, output, timeout, keep_raw):
     # Prefer the docling CLI (`docling convert ...`).
     # docling has no --output-dir, so we run it with cwd=work_dir
     # and let it write <stem>.md into that folder.
+    # image_mode: 'embedded' (default, inlines base64) | 'placeholder' |
+    # 'referenced'. v0.2 uses 'placeholder' to avoid the base64 bloat that
+    # broke image-heavy docs in v0.1.
     if bin_path:
 
         run = run_command(
@@ -260,7 +263,8 @@ def run_docling(pdf, output, timeout, keep_raw):
                 bin_path,
                 "convert",
                 str(pdf),
-                "--to", "md"
+                "--to", "md",
+                "--image-export-mode", image_mode
             ],
             timeout,
             cwd=work_dir
@@ -305,7 +309,7 @@ def run_docling(pdf, output, timeout, keep_raw):
     return build_result(run, chars)
 
 
-def run_marker(pdf, output, timeout, keep_raw):
+def run_marker(pdf, output, timeout, keep_raw, mode="balanced"):
 
     work_dir = output.parent / "marker_output"
 
@@ -313,12 +317,16 @@ def run_marker(pdf, output, timeout, keep_raw):
 
     bin_path = resolve_bin("MARKER_BIN", "marker_single")
 
+    # mode: 'balanced' (default, VLM layout model — accurate but slow on CPU,
+    # timed out on the 17 MB NVIDIA report in v0.1) | 'fast' (lightweight CPU
+    # detectors). v0.2 uses 'fast' so large files finish on CPU.
     run = run_command(
         [
             bin_path,
             str(pdf),
             "--output_dir", str(work_dir),
-            "--output_format", "markdown"
+            "--output_format", "markdown",
+            "--mode", mode
         ],
         timeout
     )
@@ -566,6 +574,26 @@ def parse_args():
         help="keep raw nested output dirs (marker/mineru/docling)"
     )
 
+    parser.add_argument(
+        "--docling-image-mode",
+        choices=["embedded", "placeholder", "referenced"],
+        default="embedded",
+        help="docling --image-export-mode (default: embedded; v0.2 uses placeholder)"
+    )
+
+    parser.add_argument(
+        "--marker-mode",
+        choices=["balanced", "fast"],
+        default="balanced",
+        help="marker_single --mode (default: balanced; v0.2 uses fast)"
+    )
+
+    parser.add_argument(
+        "--only",
+        default="",
+        help="comma-separated PDF stems to run (default: all)"
+    )
+
     return parser.parse_args()
 
 
@@ -628,6 +656,20 @@ def main():
     pdf_files = sorted(
         PDF_DIR.glob("*.pdf")
     )
+
+    if args.only.strip():
+
+        wanted = {
+            s.strip() for s in args.only.split(",") if s.strip()
+        }
+
+        before = len(pdf_files)
+
+        pdf_files = [
+            p for p in pdf_files if p.stem in wanted
+        ]
+
+        print(f"🔍 --only filter: {len(pdf_files)}/{before} PDFs selected")
 
     if not pdf_files:
 
@@ -704,12 +746,29 @@ def main():
 
             ensure_dir(tool_dir)
 
-            result = info["runner"](
-                pdf,
-                output,
-                args.timeout,
-                args.keep_raw
-            )
+            # docling/marker take tool-specific settings from CLI flags
+            if tool == "docling":
+
+                result = run_docling(
+                    pdf, output, args.timeout, args.keep_raw,
+                    args.docling_image_mode
+                )
+
+            elif tool == "marker":
+
+                result = run_marker(
+                    pdf, output, args.timeout, args.keep_raw,
+                    args.marker_mode
+                )
+
+            else:
+
+                result = info["runner"](
+                    pdf,
+                    output,
+                    args.timeout,
+                    args.keep_raw
+                )
 
             status = "✅" if result["success"] else "❌"
 

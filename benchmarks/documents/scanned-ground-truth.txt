@@ -1,0 +1,26 @@
+# Crestview Municipal Water Quality Report — 2025
+
+## Summary
+
+This report presents the annual water quality testing results for the Crestview service area. Samples were collected from twelve distribution sites between January and October 2025. All measured values met or exceeded the state minimum standards during the reporting period.
+
+The average daily consumption across the service area was approximately 4.8 million gallons, a decrease of roughly 7 percent compared with the previous year.
+
+## Detected Contaminants
+
+| Parameter | Result (mg/L) | Limit (mg/L) | Status |
+| Lead       | 0.004 | 0.015 | Pass |
+| Nitrate    | 2.30  | 10.0  | Pass |
+| Copper     | 0.082 | 1.30  | Pass |
+| Chlorine   | 1.10  | 4.0   | Pass |
+| Fluoride   | 0.65  | 4.0   | Pass |
+
+## Field Notes
+
+Field measurements were taken at a depth of 0.5 meters using calibrated probes. Laboratory analysis followed EPA method 200.8. The turbidity reading of 0.12 NTU was well below the regulatory threshold of 0.3 NTU, and the average pH held steady at 7.4 across all sites.
+
+Total dissolved solids ranged from 180 mg/L to 240 mg/L. No volatile organic compounds were detected above the reporting limit of 0.0005 mg/L.
+
+## Contact
+
+For questions about this report, contact the utility office at (555) 014-2273 or write to water@crestview.example.gov.
