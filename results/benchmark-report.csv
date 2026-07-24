@@ -1,0 +1,21 @@
+pdf,tool,success,time,chars,reason
+CREC-2026-07-21-dailydigest.pdf,markitdown,True,0.89,85489,ok
+CREC-2026-07-21-dailydigest.pdf,docling,True,9.72,95827,ok
+CREC-2026-07-21-dailydigest.pdf,marker,True,6.25,66494,ok
+CREC-2026-07-21-dailydigest.pdf,mineru,True,242.57,63408,ok
+FY25_Q2_Consolidated_Financial_Statements.pdf,markitdown,True,0.48,18578,ok
+FY25_Q2_Consolidated_Financial_Statements.pdf,docling,True,11.76,20480,ok
+FY25_Q2_Consolidated_Financial_Statements.pdf,marker,True,4.9,16875,ok
+FY25_Q2_Consolidated_Financial_Statements.pdf,mineru,True,21.8,10528,ok
+NIPS-2017-attention-is-all-you-need-Paper.pdf,markitdown,True,0.51,31687,ok
+NIPS-2017-attention-is-all-you-need-Paper.pdf,docling,True,17.31,336847,ok
+NIPS-2017-attention-is-all-you-need-Paper.pdf,marker,True,305.11,37913,ok
+NIPS-2017-attention-is-all-you-need-Paper.pdf,mineru,True,37.51,37513,ok
+NVIDIA.pdf,markitdown,True,0.44,13672,ok
+NVIDIA.pdf,docling,True,208.4,126173302,ok
+NVIDIA.pdf,marker,False,1200.11,0,timeout after 1200s
+NVIDIA.pdf,mineru,True,60.98,21052,ok
+the-state-of-enterprise-ai_2025-report.pdf,markitdown,True,6.24,33816,ok
+the-state-of-enterprise-ai_2025-report.pdf,docling,True,13.58,3400466,ok
+the-state-of-enterprise-ai_2025-report.pdf,marker,True,211.97,31701,ok
+the-state-of-enterprise-ai_2025-report.pdf,mineru,True,44.61,32108,ok
